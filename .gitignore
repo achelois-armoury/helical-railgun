@@ -21,3 +21,18 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.idea/libraries/Maven__com_codepine_api_testrail_api_java_client_2_0_1.xml
+/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_3_0.xml
+/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_3_1.xml
+/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_3_1.xml
+/.idea/libraries/Maven__com_google_guava_guava_21_0.xml
+/.idea/libraries/Maven__junit_junit_4_12.xml
+/.idea/libraries/Maven__log4j_log4j_1_2_17.xml
+/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
+/helical-railgun.iml
