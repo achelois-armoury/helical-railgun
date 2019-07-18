@@ -1,7 +1,7 @@
-package com.achelois.testrail;
+package com.achelois.helical;
 
-import com.achelois.testrail.annotations.CaseId;
-import com.achelois.testrail.annotations.RunId;
+import com.achelois.helical.annotations.CaseId;
+import com.achelois.helical.annotations.RunId;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -10,21 +10,22 @@ import org.junit.runner.notification.RunListener;
 public class Junit4Listener extends RunListener {
 
 
-    public void testRunFinished(Result result) throws Exception {
+    public void testRunFinished(Result result) {
         System.out.println("from finished");
+        Railgun.getInstance().shoot();
 
     }
 
-    public void testFailure(Failure failure) throws Exception {
+    public void testFailure(Failure failure) {
         // set to fail
         System.out.println("from failure");
     }
 
-    public void testIgnored(Description description) throws Exception {
+    public void testIgnored(Description description) {
         // set to ignore
     }
 
-    public void testStarted(Description description) throws Exception {
+    public void testStarted(Description description) {
         CaseId caseId = description.getAnnotation(CaseId.class);
         RunId runId = description.getAnnotation(RunId.class) == null ?
                 description.getTestClass().getAnnotation(RunId.class) :

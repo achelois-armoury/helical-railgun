@@ -1,4 +1,4 @@
-package com.achelois.testrail.annotations;
+package com.achelois.helical.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target(value={METHOD, TYPE})
-public @interface RunId {
-    public int value() default 0;
+@Retention(RetentionPolicy.RUNTIME)
+public @interface CaseId {
+    String value() default "0";
 }

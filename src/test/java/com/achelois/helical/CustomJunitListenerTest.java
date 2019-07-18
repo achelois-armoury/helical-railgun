@@ -1,4 +1,4 @@
-package com.achelois.testrail;
+package com.achelois.helical;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
