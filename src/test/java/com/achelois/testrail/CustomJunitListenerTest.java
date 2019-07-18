@@ -6,10 +6,10 @@ import org.junit.runner.JUnitCore;
 public class CustomJunitListenerTest {
 
     @Test
-    public void testCustomRun() {
+    public void testJunit4Run() {
         JUnitCore runner = new JUnitCore();
 
         runner.addListener(new Junit4Listener());
-        runner.run(WoodenMan.class);
+        runner.run(WoodenMan.class, WoodenMan2.class);
     }
 }
