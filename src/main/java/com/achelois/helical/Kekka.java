@@ -2,11 +2,11 @@ package com.achelois.helical;
 
 import java.util.Objects;
 
-public class Result {
+public class Kekka {
     private String runId, projId, caseId;
     private int status;
 
-    public Result(String runId, String projId, String caseId, int status) {
+    public Kekka(String runId, String projId, String caseId, int status) {
         this.runId = runId;
         this.projId = projId;
         this.caseId = caseId;
@@ -48,8 +48,8 @@ public class Result {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Result)) return false;
-        Result result = (Result) o;
+        if (!(o instanceof Kekka)) return false;
+        Kekka result = (Kekka) o;
         return runId.equals(result.runId) &&
                 projId.equals(result.projId) &&
                 caseId.equals(result.caseId);
