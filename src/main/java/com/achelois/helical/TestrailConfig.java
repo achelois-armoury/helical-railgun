@@ -11,19 +11,19 @@ public class TestrailConfig {
     public String username;
     public String password;
 
-    public static TestrailConfig get() throws IOException {
-
-
-        return new TestrailConfig();
-    }
-
-    public void test() throws IOException {
+    public TestrailConfig get() throws IOException {
         JavaPropsMapper mapper = new JavaPropsMapper();
-        TestrailConfig config = mapper.readValue(new File("testrail.properties"), TestrailConfig.class);
+
+        return mapper.readValue(
+                new File(getClass().getClassLoader().getResource("testrail.properties").getFile()),
+                TestrailConfig.class);
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(TestrailConfig.get().endPoint);
+        TestrailConfig testrailConfig = new TestrailConfig().get();
+        System.out.println(testrailConfig.endPoint);
+        System.out.println(testrailConfig.password);
+        System.out.println(testrailConfig.username);
     }
 
 }
