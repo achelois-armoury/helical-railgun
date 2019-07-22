@@ -1,7 +1,6 @@
-package com.achelois.helical;
+package com.achelois.helical.core;
 
 import com.achelois.helical.annotations.CaseId;
-import com.achelois.helical.annotations.ProjectId;
 import com.achelois.helical.annotations.RunId;
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.Result;
@@ -10,8 +9,6 @@ import com.codepine.api.testrail.model.ResultField;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.achelois.helical.Status.Skip;
 
 public class Railgun {
     private Set<Kekka> results;
@@ -35,7 +32,7 @@ public class Railgun {
         return results.add(kekka);
     }
 
-    void shoot() {
+    public void shoot() {
 
         results.forEach(System.out::println);
 

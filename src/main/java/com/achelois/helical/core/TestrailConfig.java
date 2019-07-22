@@ -1,12 +1,8 @@
-package com.achelois.helical;
+package com.achelois.helical.core;
 
-import com.codepine.api.testrail.TestRail;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
-import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class TestrailConfig {
 

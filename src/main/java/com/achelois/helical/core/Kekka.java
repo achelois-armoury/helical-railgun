@@ -1,4 +1,4 @@
-package com.achelois.helical;
+package com.achelois.helical.core;
 
 import com.achelois.helical.annotations.CaseId;
 import com.achelois.helical.annotations.RunId;

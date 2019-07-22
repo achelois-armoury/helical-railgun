@@ -1,4 +1,4 @@
-package com.achelois.helical;
+package com.achelois.helical.core;
 
 public enum Status {
     Passed(1),
