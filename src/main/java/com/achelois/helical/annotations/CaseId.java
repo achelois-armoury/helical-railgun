@@ -10,5 +10,5 @@ import static java.lang.annotation.ElementType.TYPE;
 @Target(value={METHOD, TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CaseId {
-    String value() default "0";
+    int value() default 0;
 }

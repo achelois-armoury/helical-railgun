@@ -1,5 +1,8 @@
 package com.achelois.helical;
 
+import com.achelois.helical.annotations.CaseId;
+import com.achelois.helical.annotations.ProjectId;
+import com.achelois.helical.annotations.RunId;
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
@@ -13,18 +16,23 @@ import static com.achelois.helical.Status.Skip;
 public class Railgun {
     private Set<Kekka> results;
     private TestRail testRail;
+    private TestrailConfig config;
 
-    private Railgun() {
-
+    public Railgun() {
+        config = new TestrailConfig().init();
         results = new HashSet<>();
         testRail = TestRail
-                .builder("http://replaceme.local/", "replaceme", "replaceme")
-                .applicationName("playground")
+                .builder(config.endPoint, config.username, config.password)
+                .applicationName("achelois.helical-railgun")
                 .build();
     }
 
-    public boolean append(Kekka result) {
-        return results.add(result);
+    public boolean load(RunId runId, CaseId caseId, Status status) {
+        System.out.printf("%s, %s, %s, %d\n", runId.value(), caseId.value(), status.getValue());
+
+        Kekka kekka = new Kekka(runId, caseId, status);
+        results.remove(kekka);
+        return results.add(kekka);
     }
 
     void shoot() {
@@ -32,14 +40,10 @@ public class Railgun {
         results.forEach(System.out::println);
 
         List<ResultField> fields = testRail.resultFields().list().execute();
-        testRail.results().addForCase(23972, 22615457, new Result().setStatusId(Skip.getValue()), fields).execute();
+        results.forEach(r->{
+            testRail.results().addForCase(r.getRunId(), r.getCaseId(), new Result().setStatusId(Skip.getValue()), fields).execute();
+        });
+
     }
 
-    private static class RailgunHolder {
-        static final Railgun gun = new Railgun();
-    }
-
-    static Railgun getInstance() {
-        return RailgunHolder.gun;
-    }
 }

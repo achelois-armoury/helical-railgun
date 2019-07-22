@@ -10,5 +10,5 @@ import static java.lang.annotation.ElementType.TYPE;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value={METHOD, TYPE})
 public @interface ProjectId {
-    String value() default "0";
+    int value() default 0;
 }

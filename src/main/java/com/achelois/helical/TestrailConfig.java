@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class TestrailConfig {
 
@@ -11,19 +12,20 @@ public class TestrailConfig {
     public String username;
     public String password;
 
-    public TestrailConfig get() throws IOException {
-        JavaPropsMapper mapper = new JavaPropsMapper();
+    public TestrailConfig() {
 
-        return mapper.readValue(
-                new File(getClass().getClassLoader().getResource("testrail.properties").getFile()),
-                TestrailConfig.class);
     }
 
-    public static void main(String[] args) throws IOException {
-        TestrailConfig testrailConfig = new TestrailConfig().get();
-        System.out.println(testrailConfig.endPoint);
-        System.out.println(testrailConfig.password);
-        System.out.println(testrailConfig.username);
+    public TestrailConfig init() {
+        JavaPropsMapper mapper = new JavaPropsMapper();
+
+        try {
+            return mapper.readValue(
+                    new File(getClass().getClassLoader().getResource("testrail.properties").getFile()),
+                    TestrailConfig.class);
+        } catch (Exception e) {
+            return this;
+        }
     }
 
 }

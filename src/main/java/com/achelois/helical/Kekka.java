@@ -1,40 +1,39 @@
 package com.achelois.helical;
 
+import com.achelois.helical.annotations.CaseId;
+import com.achelois.helical.annotations.RunId;
+
 import java.util.Objects;
 
 public class Kekka {
-    private String runId, projId, caseId;
+    private int runId;
+    private int caseId;
     private int status;
 
-    public Kekka(String runId, String projId, String caseId, int status) {
+    private Kekka(int runId, int caseId, int status) {
         this.runId = runId;
-        this.projId = projId;
         this.caseId = caseId;
         this.status = status;
     }
 
-    public String getCaseId() {
+    public Kekka(RunId runId, CaseId caseId, Status status) {
+        this(runId.value(), caseId.value(), status.getValue());
+    }
+
+    public int getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(String caseId) {
+    public void setCaseId(int caseId) {
         this.caseId = caseId;
     }
 
-    public String getRunId() {
+    public int getRunId() {
         return runId;
     }
 
-    public void setRunId(String runId) {
+    public void setRunId(int runId) {
         this.runId = runId;
-    }
-
-    public String getProjId() {
-        return projId;
-    }
-
-    public void setProjId(String projId) {
-        this.projId = projId;
     }
 
     public int getStatus() {
@@ -49,22 +48,20 @@ public class Kekka {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Kekka)) return false;
-        Kekka result = (Kekka) o;
-        return runId.equals(result.runId) &&
-                projId.equals(result.projId) &&
-                caseId.equals(result.caseId);
+        Kekka kekka = (Kekka) o;
+        return runId == kekka.runId &&
+                caseId == kekka.caseId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(runId, projId, caseId);
+        return Objects.hash(runId, caseId);
     }
 
     @Override
     public String toString() {
         return "Result{" +
                 "runId='" + runId + '\'' +
-                ", projId='" + projId + '\'' +
                 ", caseId='" + caseId + '\'' +
                 ", status=" + status +
                 '}';
