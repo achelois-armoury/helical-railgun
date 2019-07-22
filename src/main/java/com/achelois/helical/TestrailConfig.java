@@ -1,6 +1,8 @@
 package com.achelois.helical;
 
+import com.codepine.api.testrail.TestRail;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,20 +14,27 @@ public class TestrailConfig {
     public String username;
     public String password;
 
-    public TestrailConfig() {
+    private static TestrailConfig self;
 
-    }
-
-    public TestrailConfig init() {
+    private TestrailConfig() {
         JavaPropsMapper mapper = new JavaPropsMapper();
 
         try {
-            return mapper.readValue(
+            self = mapper.readValue(
                     new File(getClass().getClassLoader().getResource("testrail.properties").getFile()),
                     TestrailConfig.class);
         } catch (Exception e) {
-            return this;
+            self = null;
         }
+    }
+
+    public static synchronized TestrailConfig getInstance() {
+
+        if (self == null) {
+            new TestrailConfig();
+        }
+
+        return self;
     }
 
 }

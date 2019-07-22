@@ -19,7 +19,7 @@ public class Railgun {
     private TestrailConfig config;
 
     public Railgun() {
-        config = new TestrailConfig().init();
+        config = TestrailConfig.getInstance();
         results = new HashSet<>();
         testRail = TestRail
                 .builder(config.endPoint, config.username, config.password)
@@ -28,7 +28,7 @@ public class Railgun {
     }
 
     public boolean load(RunId runId, CaseId caseId, Status status) {
-        System.out.printf("%s, %s, %s, %d\n", runId.value(), caseId.value(), status.getValue());
+        System.out.printf("%s, %s, %d\n", runId.value(), caseId.value(), status.getValue());
 
         Kekka kekka = new Kekka(runId, caseId, status);
         results.remove(kekka);
@@ -39,10 +39,15 @@ public class Railgun {
 
         results.forEach(System.out::println);
 
-        List<ResultField> fields = testRail.resultFields().list().execute();
-        results.forEach(r->{
-            testRail.results().addForCase(r.getRunId(), r.getCaseId(), new Result().setStatusId(Skip.getValue()), fields).execute();
-        });
+        try {
+
+            List<ResultField> fields = testRail.resultFields().list().execute();
+            results.forEach(r -> {
+                testRail.results().addForCase(r.getRunId(), r.getCaseId(), new Result().setStatusId(r.getStatus()), fields).execute();
+            });
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
