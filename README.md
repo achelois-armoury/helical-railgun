@@ -8,7 +8,7 @@ Helical-railgun is a RESTful request shooter to Testrail server upon finished te
 
 ## Installation
 
-Example of Junit settng to be done through pom.xml
+Example of Junit setting to be done through pom.xml
 
 ```xml
         [...]
