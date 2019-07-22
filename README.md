@@ -1,4 +1,4 @@
-# Helical-railgun
+# Helical-railgun [![Build Status](https://dev.azure.com/achelois/helical-railgun/_apis/build/status/achelois-armoury.helical-railgun?branchName=master)](https://dev.azure.com/achelois/helical-railgun/_build/latest?definitionId=1&branchName=master)
 
 Helical-railgun is a RESTful request shooter to Testrail server upon finished test run. The bullets are contains information that suffice for a test case to be marked with available status(passed, failed, ignored ... etc). A shorthand for any applications to import the result later. Supported Surefire plugin providers are:
   
