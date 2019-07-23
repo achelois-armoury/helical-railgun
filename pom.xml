@@ -5,6 +5,33 @@
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-railgun</artifactId>
     <version>0.1.2-SNAPSHOT</version>
+    <name>A Railgun by Achelois</name>
+    <description>The prototype of shooting the cow</description>
+    <url>https://github.com/achelois-armoury/helical-railgun</url>
+
+    <developers>
+        <developer>
+            <id>maxl</id>
+            <name>Max Leow</name>
+            <email>lionstrength@gmail.com</email>
+            <organization>io.github</organization>
+            <organizationUrl>https://github.com/achelois-armoury/helical-railgun</organizationUrl>
+            <roles>
+                <role>Project-Administrator</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://choosealicense.com/licenses/mit/</url>
+            <distribution>repo</distribution>
+            <comments>A short and simple permissive license</comments>
+        </license>
+    </licenses>
 
     <dependencies>
         <dependency>
