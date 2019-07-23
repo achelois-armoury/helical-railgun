@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-railgun</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
 
     <dependencies>
         <dependency>
@@ -73,7 +72,7 @@
 
     <scm>
         <url>https://github.com/archelois-armoury/helical-railgun</url>
-        <tag>HEAD</tag>
+        <tag>helical-railgun-0.1.1</tag>
         <connection>scm:git:git://github.com/achelois-armoury/helical-railgun</connection>
         <developerConnection>scm:git:git@github.com:achelois-armoury/helical-railgun.git</developerConnection>
     </scm>
