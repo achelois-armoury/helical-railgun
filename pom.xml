@@ -4,7 +4,7 @@
 
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-railgun</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
 
     <dependencies>
         <dependency>
@@ -71,7 +71,7 @@
 
     <scm>
         <url>https://github.com/archelois-armoury/helical-railgun</url>
-        <tag>HEAD</tag>
+        <tag>helical-railgun-0.1.2</tag>
         <connection>scm:git:git://github.com/achelois-armoury/helical-railgun</connection>
         <developerConnection>scm:git:git@github.com:achelois-armoury/helical-railgun.git</developerConnection>
     </scm>
