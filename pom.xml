@@ -4,7 +4,7 @@
 
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-railgun</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <name>A Railgun by Achelois</name>
     <description>The prototype of shooting the cow</description>
     <url>https://github.com/achelois-armoury/helical-railgun</url>
