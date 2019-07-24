@@ -3,6 +3,7 @@ package com.achelois.helical.core;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
 import java.io.File;
+import java.util.Objects;
 
 public class TestrailConfig {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(TestrailConfig.class);
@@ -27,16 +28,16 @@ public class TestrailConfig {
             JavaPropsMapper mapper = new JavaPropsMapper();
             try {
                 self = mapper.readValue(
-                        new File(getClass().getClassLoader().getResource(PROPERTIES_FILE_NAME).getFile()),
+                        new File(Objects.requireNonNull(getClass().getClassLoader().getResource(PROPERTIES_FILE_NAME)).getFile()),
                         TestrailConfig.class);
             } catch (Exception e) {
                 log.warn(PROPERTIES_FILE_NAME + " not exist!");
-                log.debug("Default configs is assigned.");
+                log.warn("Default configs is assigned.");
             }
         }
     }
 
-    public static synchronized TestrailConfig getInstance() {
+    static synchronized TestrailConfig getInstance() {
 
         if (self == null) {
             new TestrailConfig(false);
