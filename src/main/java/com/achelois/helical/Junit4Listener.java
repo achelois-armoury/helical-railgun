@@ -12,26 +12,28 @@ import org.junit.runner.notification.RunListener;
 
 public class Junit4Listener extends RunListener {
 
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Junit4Listener.class);
     private Railgun railgun;
     private CaseId caseId;
     private RunId runId;
     private ProjectId projectId;
 
     public void testRunStarted(Description description) {
-        System.out.println("from run start");
+        log.debug("Test run started: " + description);
         railgun = new Railgun();
     }
 
     public void testRunFinished(Result result) {
-        System.out.println("from finished");
+        log.debug("test has finished was successful: " + result.wasSuccessful());
         railgun.shoot();
     }
 
     public void testFailure(Failure failure) {
         // set to fail
-        System.out.println("from failure: ");
+        log.debug("Test has failed: " + failure.getMessage());
         boolean load = railgun.load(runId, caseId, Status.Failed);
-        System.out.println("load: " + load);
+
+        log.debug("Railgun loading check: " + load);
     }
 
     public void testIgnored(Description description) {
@@ -40,17 +42,16 @@ public class Junit4Listener extends RunListener {
 
     public void testStarted(Description description) {
 
-        System.out.println("#### " + description.getMethodName() + " ####");
-
+        log.debug("Test started: " + description);
 
         // set to passed
-        reload(description);
+        prepare(description);
 
         railgun.load(runId, caseId, Status.Passed);
 
     }
 
-    private void reload(Description description) {
+    private void prepare(Description description) {
         caseId = description.getAnnotation(CaseId.class);
 
         runId = description.getAnnotation(RunId.class) == null ?

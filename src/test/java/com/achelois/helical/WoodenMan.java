@@ -5,17 +5,16 @@ import com.achelois.helical.annotations.ProjectId;
 import com.achelois.helical.annotations.RunId;
 import org.junit.Test;
 
-@RunId(1983) @ProjectId(06)
+@RunId(1983) @ProjectId(6)
 public class WoodenMan {
 
     @Test @CaseId(11)
     public void testWingChunStand() {
-        System.out.println("prepare man shou");
+
     }
 
     @Test @RunId(1944) @CaseId(12)
     public void testWingChunHighKick() throws Exception {
-        System.out.println("aim the lower chin");
         throw new Exception("opps!");
     }
 }

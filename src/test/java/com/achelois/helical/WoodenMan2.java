@@ -11,14 +11,13 @@ public class WoodenMan2 {
     @Test
     @CaseId(11)
     public void testWingChunStand() {
-        System.out.println("prepare man shou");
+
     }
 
     @Test
     @RunId(1944)
     @CaseId(12)
     public void testWingChunHighKick() throws Exception {
-        System.out.println("aim the lower chin");
         throw new Exception("opps!");
     }
 }

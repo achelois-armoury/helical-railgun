@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Railgun {
+
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Railgun.class);
     private Set<Kekka> results;
     private TestRail testRail;
     private TestrailConfig config;
@@ -22,10 +24,17 @@ public class Railgun {
                 .builder(config.endPoint, config.username, config.password)
                 .applicationName("achelois.helical-railgun")
                 .build();
+
+        log.debug("Railgun initialization complete: " + config);
     }
 
     public boolean load(RunId runId, CaseId caseId, Status status) {
-        System.out.printf("%s, %s, %d\n", runId.value(), caseId.value(), status.getValue());
+        log.debug("Loading bullet [" + runId + ", " + caseId + ", Status: " + status + "]");
+
+        if (runId == null | caseId == null | status == null) {
+            log.warn("Defect bullet detected: loading out ... ");
+            return false;
+        }
 
         Kekka kekka = new Kekka(runId, caseId, status);
         results.remove(kekka);
@@ -33,8 +42,8 @@ public class Railgun {
     }
 
     public void shoot() {
-
-        results.forEach(System.out::println);
+        log.debug("Let's turn and burn!");
+        results.forEach(log::debug);
 
         try {
 
@@ -43,7 +52,8 @@ public class Railgun {
                 testRail.results().addForCase(r.getRunId(), r.getCaseId(), new Result().setStatusId(r.getStatus()), fields).execute();
             });
         } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+            log.warn("Great balls of fire! ... but you missed.");
         }
 
     }
