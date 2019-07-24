@@ -5,52 +5,40 @@ import com.achelois.helical.annotations.RunId;
 
 import java.util.Objects;
 
-public class Kekka {
+public class Bullet {
     private int runId;
     private int caseId;
     private int status;
 
-    private Kekka(int runId, int caseId, int status) {
+    public Bullet(int runId, int caseId, int status) {
         this.runId = runId;
         this.caseId = caseId;
         this.status = status;
-    }
-
-    public Kekka(RunId runId, CaseId caseId, Status status) {
-        this(runId.value(), caseId.value(), status.getValue());
     }
 
     public int getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(int caseId) {
-        this.caseId = caseId;
-    }
-
     public int getRunId() {
         return runId;
-    }
-
-    public void setRunId(int runId) {
-        this.runId = runId;
     }
 
     public int getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus(Status status) {
+        this.status = status.getValue();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Kekka)) return false;
-        Kekka kekka = (Kekka) o;
-        return runId == kekka.runId &&
-                caseId == kekka.caseId;
+        if (!(o instanceof Bullet)) return false;
+        Bullet bullet = (Bullet) o;
+        return runId == bullet.runId &&
+                caseId == bullet.caseId;
     }
 
     @Override
@@ -60,7 +48,7 @@ public class Kekka {
 
     @Override
     public String toString() {
-        return "Result{" +
+        return "Cartridge{" +
                 "runId='" + runId + '\'' +
                 ", caseId='" + caseId + '\'' +
                 ", status=" + status +

@@ -13,10 +13,10 @@ These instructions will get your java project up and running with existing Junit
 ### Prerequisites
 Prepare a properties file which contains your valid Testrail server information under test resources directory named "testrail.properties".
 
-```
+```shell script
 endPoint=http://a.reachable.testrail.server
-username=<usernanme>
-password=<password>
+username=changeme
+password=changeme
 ```
 
 As usual, don't forget to add following dependency in your pom file.
