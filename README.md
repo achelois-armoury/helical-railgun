@@ -7,31 +7,56 @@ Helical-railgun is a RESTful request shooter to Testrail server upon finished te
 - TestNg
 - Spock
 
-## Installation
+## Getting Started
+These instructions will get your java project up and running with existing Junit4 or Spockframeowrk setup.
 
-Example of Junit setting to be done through pom.xml
+### Prerequisites
+Prepare a properties file which contains your valid Testrail server information under test resources directory named "testrail.properties".
 
-```xml
-        <plugins>
-        [...]      
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>com.achelois.helical.Junit4Listener</value>
-                        </property>
-                    </properties>
-                </configuration>
-            </plugin>
-        [...]
-        </plugins>
+```
+endPoint=http://a.reachable.testrail.server
+username=<usernanme>
+password=<password>
 ```
 
-## Usage
+As usual, don't forget to add following dependency in your pom file.
+```xml
+<dependency>
+    <groupId>io.github.achelois-armoury</groupId>
+    <artifactId>helical-railgun</artifactId>
+    <version>${vesion.above}</version>
+    <scope>test</scope>
+</dependency>
+```
+### Installation
 
+Example of Junit4 or spockframework setting
+
+```xml 
+<plugins>
+[...]      
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+            <includes>
+              <include>**/*.java</include>
+            </includes>
+            <properties>
+                <property>
+                    <name>listener</name>
+                    <value>com.achelois.helical.Junit4Listener</value>
+                </property>
+            </properties>
+        </configuration>
+    </plugin>
+[...]
+</plugins>
+```
+
+## Running the tests
+Given a set of valid test-run and test-case id(s), mark them into your test class so the result will be updated to the Testrail once it finishes the run.
+### In you test class
 ```java
 import com.achelois.helical.annotations.CaseId;
 import com.achelois.helical.annotations.RunId;
@@ -45,7 +70,15 @@ class TestClassA {
 }
 ```
 
+### Execution
+```shell script
+mvn clean test
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+### Versioning
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/achelois-armoury/helical-railgun/tags). 

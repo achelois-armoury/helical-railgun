@@ -3,7 +3,7 @@ package com.achelois.helical.core;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
 import java.io.File;
-import java.util.Objects;
+import java.net.URL;
 
 public class TestrailConfig {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(TestrailConfig.class);
@@ -14,36 +14,50 @@ public class TestrailConfig {
 
     private static TestrailConfig self;
 
-    private TestrailConfig(String endPoint, String username, String password) {
+    private TestrailConfig() {
 
-        this.endPoint = endPoint;
-        this.username = username;
-        this.password = password;
     }
 
     private TestrailConfig(boolean isDefault) {
-        self = new TestrailConfig("http://changeme", "john", "changeit");
+        self = new TestrailConfig();
+        self.endPoint = "http://changeme";
+        self.username = "john";
+        self.password = "changeit";
 
         if (!isDefault) {
             JavaPropsMapper mapper = new JavaPropsMapper();
             try {
-                self = mapper.readValue(
-                        new File(Objects.requireNonNull(getClass().getClassLoader().getResource(PROPERTIES_FILE_NAME)).getFile()),
-                        TestrailConfig.class);
+                URL resource = getClass().getClassLoader().getResource(PROPERTIES_FILE_NAME);
+                if (resource != null) {
+                    self = mapper.readValue(new File(resource.getFile()), TestrailConfig.class);
+                } else {
+                    log.warn(PROPERTIES_FILE_NAME + " not exist!");
+                }
             } catch (Exception e) {
-                log.warn(PROPERTIES_FILE_NAME + " not exist!");
                 log.warn("Default configs is assigned.");
             }
         }
     }
 
-    static synchronized TestrailConfig getInstance() {
+    public static synchronized TestrailConfig getInstance() {
 
         if (self == null) {
             new TestrailConfig(false);
         }
 
         return self;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
