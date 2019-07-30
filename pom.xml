@@ -9,7 +9,7 @@
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-railgun</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.3-SNAPSHOT</version>
+    <version>0.1.3</version>
     <modules>
         <module>core</module>
         <module>junit4</module>
@@ -55,7 +55,7 @@
 
     <scm>
         <url>https://github.com/archelois-armoury/helical-railgun</url>
-        <tag>HEAD</tag>
+        <tag>helical-railgun-0.1.3</tag>
         <connection>scm:git:git://github.com/achelois-armoury/helical-railgun</connection>
         <developerConnection>scm:git:git@github.com:achelois-armoury/helical-railgun.git</developerConnection>
     </scm>
