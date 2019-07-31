@@ -18,6 +18,7 @@ helical.testrail.endPoint=http://a.reachable.testrail.server
 helical.testrail.username=changeme
 helical.testrail.password=changeme
 helical.testrail.runid=22
+helical.enable=true
 ```
 
 As usual, don't forget to add following dependency in your pom file.
