@@ -1,5 +1,6 @@
 package com.achelois.helical.junit4;
 
+import com.achelois.helical.annotations.CaseId;
 import com.achelois.helical.core.Ammunition;
 import com.achelois.helical.core.Bullet;
 import com.achelois.helical.core.Railgun;
@@ -8,8 +9,6 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
-
-import java.lang.reflect.Method;
 
 public class Junit4Listener extends RunListener {
 
@@ -28,20 +27,22 @@ public class Junit4Listener extends RunListener {
         // set to fail
         bullet.setStatus(Status.Failed);
         railgun.load(bullet);
+
     }
 
-    public void testIgnored(Description description) throws Exception {
+    public void testIgnored(Description description) {
         prepare(description, Status.Skip);
     }
 
-    public void testStarted(Description description) throws Exception {
+    public void testStarted(Description description) {
         prepare(description, Status.Passed);
     }
 
-    private void prepare(Description description, Status status) throws NoSuchMethodException {
+    private void prepare(Description description, Status status) {
 
-        Method method = description.getTestClass().getDeclaredMethod(description.getMethodName());
-        bullet = Ammunition.prepare(description.getTestClass(), method, status);
+        CaseId caseId = description.getAnnotation(CaseId.class);
+
+        bullet = Ammunition.prepare(status, caseId);
         railgun.load(bullet);
     }
 

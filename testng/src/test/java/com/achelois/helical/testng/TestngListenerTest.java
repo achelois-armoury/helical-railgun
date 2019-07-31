@@ -1,7 +1,5 @@
 package com.achelois.helical.testng;
 import com.achelois.helical.annotations.CaseId;
-import com.achelois.helical.annotations.RunId;
-import org.testng.Assert;
 import org.testng.TestNG;
 import org.testng.annotations.Test;
 
@@ -15,10 +13,9 @@ public class TestngListenerTest {
         testSuite.addListener(testngListener);
         testSuite.run();
 
-        org.junit.Assert.assertEquals(testngListener.getRailgun().getMagazine().size(), 3);
+        org.junit.Assert.assertEquals(3, testngListener.getRailgun().getMagazine().size());
     }
 
-    @RunId(22)
     public static class WoodenMan {
 
         @Test
@@ -28,17 +25,15 @@ public class TestngListenerTest {
         }
 
         @Test
-        @RunId(11)
         @CaseId(12)
         public void testRoundHorseKick() throws Exception {
             throw new Exception("opps!");
         }
     }
 
-    @RunId(31)
-    @CaseId(32)
+
     public static class WoodenMan2 {
-        @Test
+        @Test @CaseId(32)
         public void testManShao() {
         }
 

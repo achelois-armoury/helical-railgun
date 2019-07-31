@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 
-@Target(value={METHOD, TYPE})
+@Target(value={METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CaseId {
     int value() default 0;

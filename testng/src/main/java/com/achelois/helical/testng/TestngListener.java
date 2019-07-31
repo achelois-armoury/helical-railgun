@@ -1,4 +1,6 @@
 package com.achelois.helical.testng;
+
+import com.achelois.helical.annotations.CaseId;
 import com.achelois.helical.core.Ammunition;
 import com.achelois.helical.core.Bullet;
 import com.achelois.helical.core.Railgun;
@@ -17,29 +19,19 @@ public class TestngListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        Bullet bullet = Ammunition.prepare(iTestResult.getMethod().getTestClass().getRealClass(),
-                iTestResult.getMethod().getConstructorOrMethod().getMethod(),
-                Status.Passed);
 
-        railgun.load(bullet);
+        prepare(iTestResult, Status.Passed);
+
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Bullet bullet = Ammunition.prepare(iTestResult.getMethod().getTestClass().getRealClass(),
-                iTestResult.getMethod().getConstructorOrMethod().getMethod(),
-                Status.Failed);
-
-        railgun.load(bullet);
+        prepare(iTestResult, Status.Failed);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        Bullet bullet = Ammunition.prepare(iTestResult.getMethod().getTestClass().getRealClass(),
-                iTestResult.getMethod().getConstructorOrMethod().getMethod(),
-                Status.Skip);
-
-        railgun.load(bullet);
+        prepare(iTestResult, Status.Skip);
     }
 
     @Override
@@ -60,5 +52,12 @@ public class TestngListener implements ITestListener {
 
     Railgun getRailgun() {
         return railgun;
+    }
+
+    private void prepare(ITestResult iTestResult, Status status) {
+        CaseId caseId = iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(CaseId.class);
+
+        Bullet bullet = Ammunition.prepare(status, caseId);
+        railgun.load(bullet);
     }
 }

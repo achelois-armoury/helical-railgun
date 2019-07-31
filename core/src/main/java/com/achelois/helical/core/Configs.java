@@ -7,37 +7,56 @@ import java.util.Properties;
 
 public class Configs {
 
-    private static final String PROPERTIES_FILE_NAME = "testrail.properties";
-    private final Properties appProps;
     String endPoint;
     String username;
     String password;
+    String runId;
+    String testplan;
+
+    private static Configs self;
+
+    static synchronized Configs getInstance() {
+        if (self == null) {
+            self = new Configs();
+            return self;
+        }
+
+        return self;
+    }
 
     Configs() {
-        appProps = new Properties();
+        Properties appProps = new Properties();
 
         try {
 
-            File file = Paths.get(ClassLoader.getSystemResource(PROPERTIES_FILE_NAME).toURI()).toFile();
+            File file = Paths.get(ClassLoader.getSystemResource("testrail.properties").toURI()).toFile();
             appProps.load(new FileInputStream(file));
-            endPoint = appProps.getProperty("endPoint");
-            username = appProps.getProperty("username");
-            password = appProps.getProperty("password");
+
+            endPoint = appProps.getProperty("helical.testrail.endPoint");
+            username = appProps.getProperty("helical.testrail.username");
+            password = appProps.getProperty("helical.testrail.password");
+            runId = appProps.getProperty("helical.testrail.runid");
+            testplan = appProps.getProperty("helical.testrail.testplan");
+
         } catch (Exception e) {
 
             username = "changeme";
             password = "changeme";
             endPoint = "http://changeme";
+            runId = "0";
+            testplan = "";
         }
 
     }
 
     @Override
     public String toString() {
-        return "TestrailConfig{" +
+        return "Configs{" +
                 "endPoint='" + endPoint + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", runId='" + runId + '\'' +
+                ", testplan='" + testplan + '\'' +
                 '}';
     }
 }
