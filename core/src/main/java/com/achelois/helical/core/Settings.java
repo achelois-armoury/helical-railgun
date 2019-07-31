@@ -5,26 +5,27 @@ import java.io.FileInputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class Configs {
+public class Settings {
 
     String endPoint;
     String username;
     String password;
     String runId;
     String testplan;
+    boolean enable;
 
-    private static Configs self;
+    private static Settings self;
 
-    static synchronized Configs getInstance() {
+    static synchronized Settings getInstance() {
         if (self == null) {
-            self = new Configs();
+            self = new Settings();
             return self;
         }
 
         return self;
     }
 
-    Configs() {
+    private Settings() {
         Properties appProps = new Properties();
 
         try {
@@ -37,6 +38,7 @@ public class Configs {
             password = appProps.getProperty("helical.testrail.password");
             runId = appProps.getProperty("helical.testrail.runid");
             testplan = appProps.getProperty("helical.testrail.testplan");
+            enable = Boolean.parseBoolean(appProps.getProperty("helical.enable"));
 
         } catch (Exception e) {
 
@@ -51,7 +53,7 @@ public class Configs {
 
     @Override
     public String toString() {
-        return "Configs{" +
+        return "Settings{" +
                 "endPoint='" + endPoint + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

@@ -10,7 +10,7 @@ public class Ammunition {
             return new Bullet(0, 0, 0);
         }
 
-        return new Bullet(Integer.parseInt(Configs.getInstance().runId), caseId.value(), status.getValue());
+        return new Bullet(Integer.parseInt(Settings.getInstance().runId), caseId.value(), status.getValue());
     }
 
 }

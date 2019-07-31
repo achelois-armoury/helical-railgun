@@ -13,10 +13,10 @@ public class Railgun {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Railgun.class);
     private Set<Bullet> magazine;
     private TestRail testRail;
-    private Configs config;
+    private Settings config;
 
     public Railgun() {
-        config = new Configs();
+        config = Settings.getInstance();
         magazine = new HashSet<>();
         testRail = TestRail
                 .builder(config.endPoint, config.username, config.password)
@@ -39,6 +39,10 @@ public class Railgun {
     }
 
     public void shoot() {
+        if (!config.enable) {
+            return;
+        }
+
         log.debug("Let's turn and burn!");
 
         try {
