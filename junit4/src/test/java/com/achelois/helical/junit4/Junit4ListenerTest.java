@@ -22,13 +22,13 @@ public class Junit4ListenerTest {
     public static class WoodenMan {
 
         @Test
-        @CaseId(1)
+        @CaseId(2)
         public void testWingChunStand() {
 
         }
 
         @Test
-        @CaseId(2)
+        @CaseId(3)
         public void testWingChunHighKick() throws Exception {
             throw new Exception("opps!");
         }
@@ -37,14 +37,14 @@ public class Junit4ListenerTest {
     public static class WoodenMan2 {
 
         @Test
-        @CaseId(3)
-        public void testWingChunStand() {
+        @CaseId(4)
+        public void testWingChunBongShou() {
 
         }
 
         @Test
-        @CaseId(4)
-        public void testWingChunHighKick() throws Exception {
+        @CaseId(5)
+        public void testWingChunManShou() throws Exception {
             throw new Exception("opps!");
         }
     }

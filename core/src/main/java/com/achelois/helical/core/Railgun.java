@@ -1,6 +1,7 @@
 package com.achelois.helical.core;
 
 import com.codepine.api.testrail.TestRail;
+import com.codepine.api.testrail.model.Plan;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
 
