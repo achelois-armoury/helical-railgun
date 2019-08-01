@@ -58,6 +58,23 @@ public class Railgun {
 
     }
 
+    public static void main(String[] args) {
+        TestRail build = TestRail
+                .builder("https://maxleow.testrail.io", "lionstrength@gmail.com", "iMgwPl8ytc58DQ5JJIOQ")
+                .applicationName("achelois.helical-railgun")
+                .build();
+
+        Plan.Entry entry = new Plan.Entry();
+        entry.setName("Component Test by Max");
+
+
+        Plan p = build.plans().get(2).execute();
+        p.getEntries().forEach(System.out::println);
+
+    }
+
+
+
     public Set<Bullet> getMagazine() {
         return magazine;
     }
