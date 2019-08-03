@@ -26,6 +26,7 @@ public class Junit4Listener extends RunListener {
     public void testFailure(Failure failure) {
         // set to fail
         bullet.setStatus(Status.Failed);
+        bullet.setComment(failure.getMessage());
         railgun.load(bullet);
 
     }
@@ -42,7 +43,7 @@ public class Junit4Listener extends RunListener {
 
         CaseId caseId = description.getAnnotation(CaseId.class);
 
-        bullet = Ammunition.prepare(status, caseId);
+        bullet = Ammunition.prepare(status, caseId, "");
         railgun.load(bullet);
     }
 

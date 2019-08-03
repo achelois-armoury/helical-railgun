@@ -1,14 +1,12 @@
 package com.achelois.helical.core;
 
-import java.util.Objects;
-
 public class Bullet {
-    private int runId;
+    private String comment;
     private int caseId;
     private int status;
 
-    Bullet(int runId, int caseId, int status) {
-        this.runId = runId;
+    Bullet(int caseId, int status, String comment) {
+        this.comment = comment;
         this.caseId = caseId;
         this.status = status;
     }
@@ -17,8 +15,8 @@ public class Bullet {
         return caseId;
     }
 
-    int getRunId() {
-        return runId;
+    String getComment() {
+        return comment;
     }
 
     int getStatus() {
@@ -29,26 +27,8 @@ public class Bullet {
         this.status = status.getValue();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Bullet)) return false;
-        Bullet bullet = (Bullet) o;
-        return runId == bullet.runId &&
-                caseId == bullet.caseId;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(runId, caseId);
-    }
-
-    @Override
-    public String toString() {
-        return "Cartridge{" +
-                "runId='" + runId + '\'' +
-                ", caseId='" + caseId + '\'' +
-                ", status=" + status +
-                '}';
-    }
 }

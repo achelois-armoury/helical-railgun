@@ -11,7 +11,7 @@ public class SettingsTest
         Assert.assertEquals("http://test2.local", instance.endPoint);
         Assert.assertEquals("user1", instance.username);
         Assert.assertEquals("pass1", instance.password);
-        Assert.assertEquals("22", instance.runId);
+        Assert.assertEquals(22, instance.runId);
         Assert.assertEquals("Develop - BPS", instance.testplan);
 
     }

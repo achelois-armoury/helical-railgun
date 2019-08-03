@@ -10,7 +10,7 @@ public class Settings {
     String endPoint;
     String username;
     String password;
-    String runId;
+    int runId;
     String testplan;
     boolean enable;
 
@@ -36,7 +36,7 @@ public class Settings {
             endPoint = appProps.getProperty("helical.testrail.endPoint");
             username = appProps.getProperty("helical.testrail.username");
             password = appProps.getProperty("helical.testrail.password");
-            runId = appProps.getProperty("helical.testrail.runid");
+            runId = Integer.parseInt(appProps.getProperty("helical.testrail.runid"));
             testplan = appProps.getProperty("helical.testrail.testplan");
             enable = Boolean.parseBoolean(appProps.getProperty("helical.enable"));
 
@@ -45,7 +45,7 @@ public class Settings {
             username = "changeme";
             password = "changeme";
             endPoint = "http://changeme";
-            runId = "0";
+            runId = 0;
             testplan = "";
         }
 

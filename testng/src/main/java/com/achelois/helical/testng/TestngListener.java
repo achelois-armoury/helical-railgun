@@ -56,8 +56,11 @@ public class TestngListener implements ITestListener {
 
     private void prepare(ITestResult iTestResult, Status status) {
         CaseId caseId = iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(CaseId.class);
-
-        Bullet bullet = Ammunition.prepare(status, caseId);
+        String message = "";
+        if (iTestResult.getThrowable() != null) {
+            message = iTestResult.getThrowable().getMessage();
+        }
+        Bullet bullet = Ammunition.prepare(status, caseId, message);
         railgun.load(bullet);
     }
 }

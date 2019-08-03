@@ -1,24 +1,24 @@
 package com.achelois.helical.core;
 
 import com.codepine.api.testrail.TestRail;
+import com.codepine.api.testrail.model.Milestone;
 import com.codepine.api.testrail.model.Plan;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Railgun {
 
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Railgun.class);
-    private Set<Bullet> magazine;
+    private List<Result> magazine;
     private TestRail testRail;
     private Settings config;
 
     public Railgun() {
         config = Settings.getInstance();
-        magazine = new HashSet<>();
+        magazine = new ArrayList<>();
         testRail = TestRail
                 .builder(config.endPoint, config.username, config.password)
                 .applicationName("achelois.helical-railgun")
@@ -35,26 +35,40 @@ public class Railgun {
             return false;
         }
 
-        magazine.remove(bullet);
-        return magazine.add(bullet);
+
+        Result result = magazine.stream().parallel()
+                .filter(item -> item.getCaseId().equals(bullet.getCaseId()))
+                .findAny()
+                .orElse(null);
+
+        if (result == null) {
+
+            return magazine.add(new Result()
+                    .setCaseId(bullet.getCaseId())
+                    .setStatusId(bullet.getStatus())
+                    .setComment(bullet.getComment()));
+
+        } else {
+            magazine.stream().parallel()
+                    .filter(item -> item.getCaseId().equals(bullet.getCaseId()))
+                    .forEach(item -> item
+                            .setStatusId(bullet.getStatus())
+                            .setComment(bullet.getComment()));
+
+            return false;
+        }
+
     }
 
-    public void shoot() {
+    public List<Result> shoot() {
         if (!config.enable) {
-            return;
+            return null;
         }
 
         log.debug("Let's turn and burn!");
 
-        try {
-
-            List<ResultField> fields = testRail.resultFields().list().execute();
-            magazine.forEach(r -> testRail.results().addForCase(r.getRunId(), r.getCaseId(),
-                    new Result().setStatusId(r.getStatus()), fields).execute());
-        } catch (RuntimeException e) {
-            log.error(e.getMessage());
-            log.warn("Great balls of fire! ... but you missed.");
-        }
+        List<ResultField> fields = testRail.resultFields().list().execute();
+        return testRail.results().addForCases(config.runId, magazine, fields).execute();
 
     }
 
@@ -71,11 +85,13 @@ public class Railgun {
         Plan p = build.plans().get(2).execute();
         p.getEntries().forEach(System.out::println);
 
+        Milestone milestone = build.milestones().get(3).execute();
+        System.out.println(milestone);
+        System.out.println(milestone.getProjectId());
+
     }
 
-
-
-    public Set<Bullet> getMagazine() {
+    public List<Result> getMagazine() {
         return magazine;
     }
 

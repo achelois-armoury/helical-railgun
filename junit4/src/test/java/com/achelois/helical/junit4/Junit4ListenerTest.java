@@ -16,7 +16,7 @@ public class Junit4ListenerTest {
 
         junit4Listener.getRailgun().getMagazine().forEach(System.out::println);
 
-        Assert.assertEquals(junit4Listener.getRailgun().getMagazine().size(), 4);
+        Assert.assertEquals(4, junit4Listener.getRailgun().getMagazine().size());
     }
 
     public static class WoodenMan {
@@ -29,8 +29,8 @@ public class Junit4ListenerTest {
 
         @Test
         @CaseId(3)
-        public void testWingChunHighKick() throws Exception {
-            throw new Exception("opps!");
+        public void testWingChunHighKick() {
+            assert false : "high kick has problem";
         }
     }
 
@@ -44,8 +44,8 @@ public class Junit4ListenerTest {
 
         @Test
         @CaseId(5)
-        public void testWingChunManShou() throws Exception {
-            throw new Exception("opps!");
+        public void testWingChunManShou() {
+            assert false : "man shou has issue";
         }
     }
 }
