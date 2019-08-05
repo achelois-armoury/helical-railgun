@@ -3,6 +3,7 @@ package com.achelois.helical.core;
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
+import com.codepine.api.testrail.model.Run;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Railgun {
                 .build();
 
         log.debug("Railgun initialization complete: " + config);
+        init();
     }
 
     public boolean load(Bullet bullet) {
@@ -56,6 +58,21 @@ public class Railgun {
             return false;
         }
 
+    }
+
+    public void init() {
+        try {
+            Run run = testRail.runs().get(config.runId).execute();
+            run.getCaseIds().stream().parallel().forEach(c -> {
+                magazine.add(new Result()
+                        .setCaseId(c)
+                        .setStatusId(Status.Skip.getValue())
+                        .setComment("Test has not executed!"));
+            });
+
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+        }
     }
 
     public List<Result> shoot() {
