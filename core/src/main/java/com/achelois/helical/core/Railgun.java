@@ -1,8 +1,6 @@
 package com.achelois.helical.core;
 
 import com.codepine.api.testrail.TestRail;
-import com.codepine.api.testrail.model.Milestone;
-import com.codepine.api.testrail.model.Plan;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
 
@@ -69,25 +67,6 @@ public class Railgun {
 
         List<ResultField> fields = testRail.resultFields().list().execute();
         return testRail.results().addForCases(config.runId, magazine, fields).execute();
-
-    }
-
-    public static void main(String[] args) {
-        TestRail build = TestRail
-                .builder("https://maxleow.testrail.io", "lionstrength@gmail.com", "iMgwPl8ytc58DQ5JJIOQ")
-                .applicationName("achelois.helical-railgun")
-                .build();
-
-        Plan.Entry entry = new Plan.Entry();
-        entry.setName("Component Test by Max");
-
-
-        Plan p = build.plans().get(2).execute();
-        p.getEntries().forEach(System.out::println);
-
-        Milestone milestone = build.milestones().get(3).execute();
-        System.out.println(milestone);
-        System.out.println(milestone.getProjectId());
 
     }
 
