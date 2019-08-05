@@ -26,7 +26,7 @@ As usual, don't forget to add following dependency in your pom file.
 <dependency>
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-junit4</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.3</version>
     <scope>test</scope>
 </dependency>
 ```
