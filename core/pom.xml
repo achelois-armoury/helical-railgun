@@ -3,12 +3,12 @@
     <parent>
         <artifactId>helical-railgun</artifactId>
         <groupId>io.github.achelois-armoury</groupId>
-        <version>0.1.7</version>
+        <version>0.1.8-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>helical-core</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -74,6 +74,6 @@
     </build>
 
   <scm>
-    <tag>helical-railgun-0.1.7</tag>
+    <tag>helical-core-0.1.5</tag>
   </scm>
 </project>
