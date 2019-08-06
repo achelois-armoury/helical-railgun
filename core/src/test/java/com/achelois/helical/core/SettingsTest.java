@@ -8,10 +8,10 @@ public class SettingsTest
     @Test
     public void testValidConfigValue() {
         Settings instance = Settings.getInstance();
-        Assert.assertEquals("http://test2.local", instance.endPoint);
-        Assert.assertEquals("user1", instance.username);
-        Assert.assertEquals("pass1", instance.password);
-        Assert.assertEquals(22, instance.runId);
+        Assert.assertEquals("https://maxleow.testrail.io", instance.endPoint);
+        Assert.assertEquals("lionstrength@gmail.com", instance.username);
+        Assert.assertEquals("iMgwPl8ytc58DQ5JJIOQ", instance.password);
+        Assert.assertEquals(7, instance.runId);
         Assert.assertEquals("Develop - BPS", instance.testplan);
 
     }
