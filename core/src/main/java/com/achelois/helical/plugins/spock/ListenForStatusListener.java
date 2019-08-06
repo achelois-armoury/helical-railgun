@@ -15,6 +15,10 @@ public class ListenForStatusListener extends AbstractRunListener {
 
     private Railgun railgun;
 
+    ListenForStatusListener(Railgun railgun) {
+        this.railgun = railgun;
+    }
+
     @Override
     public void error(ErrorInfo error) {
         CaseId caseId = error.getMethod().getAnnotation(CaseId.class);
@@ -23,7 +27,7 @@ public class ListenForStatusListener extends AbstractRunListener {
     }
 
     public void beforeSpec(SpecInfo spec) {
-        railgun = new Railgun();
+
     }
 
     public void beforeFeature(FeatureInfo feature) {
