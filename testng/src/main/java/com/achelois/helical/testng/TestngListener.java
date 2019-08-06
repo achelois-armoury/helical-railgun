@@ -1,7 +1,6 @@
 package com.achelois.helical.testng;
 
 import com.achelois.helical.annotations.CaseId;
-import com.achelois.helical.core.Ammunition;
 import com.achelois.helical.core.Bullet;
 import com.achelois.helical.core.Railgun;
 import com.achelois.helical.core.Status;
@@ -31,7 +30,7 @@ public class TestngListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        prepare(iTestResult, Status.Skip);
+        prepare(iTestResult, Status.Retest);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class TestngListener implements ITestListener {
         if (iTestResult.getThrowable() != null) {
             message = iTestResult.getThrowable().getMessage();
         }
-        Bullet bullet = Ammunition.prepare(status, caseId, message);
+        Bullet bullet = new Bullet(caseId, status, message);
         railgun.load(bullet);
     }
 }

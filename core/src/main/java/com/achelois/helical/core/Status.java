@@ -4,9 +4,7 @@ public enum Status {
     Passed(1),
     Blocked(2),
     Retest(4),
-    Failed(5),
-    Clarification(6),
-    Skip(7);
+    Failed(5);
 
     private final int value;
 

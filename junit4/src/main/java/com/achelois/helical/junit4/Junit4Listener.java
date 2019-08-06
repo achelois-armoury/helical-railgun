@@ -1,7 +1,6 @@
 package com.achelois.helical.junit4;
 
 import com.achelois.helical.annotations.CaseId;
-import com.achelois.helical.core.Ammunition;
 import com.achelois.helical.core.Bullet;
 import com.achelois.helical.core.Railgun;
 import com.achelois.helical.core.Status;
@@ -32,7 +31,7 @@ public class Junit4Listener extends RunListener {
     }
 
     public void testIgnored(Description description) {
-        prepare(description, Status.Skip);
+        prepare(description, Status.Retest);
     }
 
     public void testStarted(Description description) {
@@ -43,7 +42,7 @@ public class Junit4Listener extends RunListener {
 
         CaseId caseId = description.getAnnotation(CaseId.class);
 
-        bullet = Ammunition.prepare(status, caseId, "");
+        bullet = new Bullet(caseId, status, "");
         railgun.load(bullet);
     }
 

@@ -1,7 +1,6 @@
 package com.achelois.helical.plugins.spock;
 
 import com.achelois.helical.annotations.CaseId;
-import com.achelois.helical.core.Ammunition;
 import com.achelois.helical.core.Bullet;
 import com.achelois.helical.core.Railgun;
 import com.achelois.helical.core.Status;
@@ -22,7 +21,7 @@ public class ListenForStatusListener extends AbstractRunListener {
     @Override
     public void error(ErrorInfo error) {
         CaseId caseId = error.getMethod().getAnnotation(CaseId.class);
-        Bullet bullet = Ammunition.prepare(Status.Failed, caseId, "");
+        Bullet bullet = new Bullet(caseId, Status.Failed, error.getException().getMessage());
         railgun.load(bullet);
     }
 
@@ -32,23 +31,19 @@ public class ListenForStatusListener extends AbstractRunListener {
 
     public void beforeFeature(FeatureInfo feature) {
         CaseId caseId = feature.getFeatureMethod().getAnnotation(CaseId.class);
-        Bullet bullet = Ammunition.prepare(Status.Passed, caseId, "");
+        Bullet bullet = new Bullet(caseId, Status.Passed, "");
         railgun.load(bullet);
     }
 
     public void beforeIteration(IterationInfo iteration) {
-        System.out.println("before iteration: " + iteration.getName());
     }
 
     public void afterIteration(IterationInfo iteration) {
-        System.out.println("after iteration: " + iteration.getName());
     }
 
     public void afterFeature(FeatureInfo feature) {
-        System.out.println("after feature: " + feature.getName());
     }
 
     public void afterSpec(SpecInfo spec) {
-        System.out.println("after spec: " + spec.getName());
     }
 }

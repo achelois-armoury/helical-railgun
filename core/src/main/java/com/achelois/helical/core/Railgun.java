@@ -3,7 +3,7 @@ package com.achelois.helical.core;
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
-import com.codepine.api.testrail.model.Run;
+import com.codepine.api.testrail.model.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Railgun {
     public boolean load(Bullet bullet) {
         log.debug("Loading bullet [" + bullet + "]");
 
-        if (bullet == null) {
+        if (bullet == null || bullet.getCaseId() == 0) {
             log.warn("Defect bullet detected: loading out ... ");
             return false;
         }
@@ -60,18 +60,20 @@ public class Railgun {
 
     }
 
-    public void init() {
+    private void init() {
         try {
-            Run run = testRail.runs().get(config.runId).execute();
-            run.getCaseIds().stream().parallel().forEach(c -> {
-                magazine.add(new Result()
-                        .setCaseId(c)
-                        .setStatusId(Status.Skip.getValue())
-                        .setComment("Test has not executed!"));
-            });
+
+            List<Test> tests = testRail.tests().list(config.runId).execute();
+
+            log.info("total test retrieved: " + tests.size());
+            tests.stream().parallel().forEach(t -> magazine.add(
+                    new Result()
+                            .setCaseId(t.getCaseId())
+                            .setStatusId(Status.Retest.getValue())
+                            .setComment("Test has not executed!")));
 
         } catch (Exception e) {
-            log.warn(e.getMessage());
+            log.warn("initialization failed: no test retrieved!", e.getCause());
         }
     }
 
