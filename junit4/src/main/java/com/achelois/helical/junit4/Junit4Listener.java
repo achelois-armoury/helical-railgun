@@ -11,11 +11,11 @@ import org.junit.runner.notification.RunListener;
 
 public class Junit4Listener extends RunListener {
 
-    private Railgun railgun;
+    private Railgun railgun = new Railgun();
     private Bullet bullet;
 
     public void testRunStarted(Description description) {
-        railgun = new Railgun();
+
     }
 
     public void testRunFinished(Result result) {

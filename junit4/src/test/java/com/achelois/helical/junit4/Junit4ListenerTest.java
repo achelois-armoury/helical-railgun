@@ -6,6 +6,11 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
 public class Junit4ListenerTest {
+    @Test
+    public void testJunit4Startup() {
+        Junit4Listener j = new Junit4Listener();
+        Assert.assertNotNull(j.getRailgun());
+    }
 
     @Test
     public void testJunit4Run() {
