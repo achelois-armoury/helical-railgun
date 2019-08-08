@@ -1,0 +1,10 @@
+enable: true
+endpoint: "https://maxleow.testrail.io"
+username: "lionstrength@gmail.com"
+password: "jNivbkyyJ6XsYV4/FidY-K7KyhCVPsF3YLU1IP0PI"
+runid: 7
+
+result_template:
+  status: 4
+  version: "0.1.1-SNAPSHOT"
+  comment: "test has not executed"

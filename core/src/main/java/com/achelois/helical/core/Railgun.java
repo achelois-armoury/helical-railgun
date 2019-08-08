@@ -1,5 +1,6 @@
 package com.achelois.helical.core;
 
+import com.achelois.helical.core.settings.Setting;
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
@@ -13,13 +14,13 @@ public class Railgun {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Railgun.class);
     private List<Result> magazine;
     private TestRail testRail;
-    private Settings config;
+    private Setting config;
 
     public Railgun() {
         config = Settings.getInstance();
         magazine = new ArrayList<>();
         testRail = TestRail
-                .builder(config.endPoint, config.username, config.password)
+                .builder(config.getEndpoint(), config.getUsername(), config.getPassword())
                 .applicationName("achelois.helical-railgun")
                 .build();
 
@@ -35,42 +36,33 @@ public class Railgun {
             return false;
         }
 
-
-        Result result = magazine.stream().parallel()
+        magazine.stream().parallel()
                 .filter(item -> item.getCaseId().equals(bullet.getCaseId()))
-                .findAny()
-                .orElse(null);
+                .forEach(item -> item
+                        .setStatusId(bullet.getStatus())
+                        .setComment(bullet.getComment())
+                );
 
-        if (result == null) {
-
-            return magazine.add(new Result()
-                    .setCaseId(bullet.getCaseId())
-                    .setStatusId(bullet.getStatus())
-                    .setComment(bullet.getComment()));
-
-        } else {
-            magazine.stream().parallel()
-                    .filter(item -> item.getCaseId().equals(bullet.getCaseId()))
-                    .forEach(item -> item
-                            .setStatusId(bullet.getStatus())
-                            .setComment(bullet.getComment()));
-
-            return false;
-        }
-
+        return true;
     }
 
     private void init() {
+        if (!config.isEnable()) {
+            return;
+        }
+
         try {
 
-            List<Test> tests = testRail.tests().list(config.runId).execute();
+            List<Test> tests = testRail.tests().list(config.getRunid()).execute();
 
             log.info("total test retrieved: " + tests.size());
             tests.stream().parallel().forEach(t -> magazine.add(
                     new Result()
                             .setCaseId(t.getCaseId())
-                            .setStatusId(Status.Retest.getValue())
-                            .setComment("Test has not executed!")));
+                            .setStatusId(config.getResult_template().getStatus())
+                            .setComment(config.getResult_template().getComment())
+                            .setVersion(config.getResult_template().getVersion())
+            ));
 
         } catch (Exception e) {
             log.warn("initialization failed: no test retrieved!", e.getCause());
@@ -78,19 +70,18 @@ public class Railgun {
     }
 
     public List<Result> shoot() {
-        if (!config.enable) {
+        if (!config.isEnable()) {
             return null;
         }
 
         log.debug("Let's turn and burn!");
 
         List<ResultField> fields = testRail.resultFields().list().execute();
-        return testRail.results().addForCases(config.runId, magazine, fields).execute();
+        return testRail.results().addForCases(config.getRunid(), magazine, fields).execute();
 
     }
 
     public List<Result> getMagazine() {
         return magazine;
     }
-
 }

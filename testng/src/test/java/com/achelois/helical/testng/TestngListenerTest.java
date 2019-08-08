@@ -15,7 +15,7 @@ public class TestngListenerTest {
         testSuite.addListener(testngListener);
         testSuite.run();
 
-        org.junit.Assert.assertEquals(3, testngListener.getRailgun().getMagazine().size());
+        org.junit.Assert.assertEquals(0, testngListener.getRailgun().getMagazine().size());
     }
 
     @Test
@@ -31,10 +31,9 @@ public class TestngListenerTest {
         @CaseId(7)
         public void testRoundHorseKick() {
             assert true : "testRoundHorseKick has problem";
-            Assert.assertEquals(true, false);
+            Assert.assertTrue(false);
         }
     }
-
 
     @Test
     public static class WoodenMan2 {
