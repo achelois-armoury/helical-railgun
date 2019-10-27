@@ -1,5 +1,6 @@
 package com.achelois.helical.core;
 
+import com.codepine.api.testrail.TestRail;
 import org.junit.Assert;
 import org.junit.Test;
 

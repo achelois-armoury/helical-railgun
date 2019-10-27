@@ -11,28 +11,31 @@ Helical-railgun is a RESTful request shooter to Testrail server upon finished te
 These instructions will get your java project up and running with existing Junit4 or Spockframeowrk setup.
 
 ### Prerequisites
-Prepare a properties file which contains your valid Testrail server information under test resources directory named "testrail.properties".
+Prepare a properties file which contains your valid Testrail server information under test resources directory named "testrail.yml".
 
-```shell script
-helical.testrail.endPoint=http://a.reachable.testrail.server
-helical.testrail.username=changeme
-helical.testrail.password=changeme
-helical.testrail.runid=22
-helical.enable=true
+```yaml
+enable: true
+endpoint: "https://replaceme.io"
+username: "replaceme@gmail.com"
+password: "your_api_key_or_password"
+runid: 7
+
+result_template:
+  status: 4
+  version: "0.1.1-SNAPSHOT"
+  comment: "test has not executed"
 ```
+### Installations
 
-As usual, don't forget to add following dependency in your pom file.
+#### Example of Junit4 and spockframework with Junit setting
 ```xml
 <dependency>
     <groupId>io.github.achelois-armoury</groupId>
     <artifactId>helical-junit4</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.6</version>
     <scope>test</scope>
 </dependency>
 ```
-### Installation
-
-Example of Junit4 and spockframework setting
 
 ```xml 
 <plugins>
@@ -55,6 +58,54 @@ Example of Junit4 and spockframework setting
     </plugin>
 [...]
 </plugins>
+```
+
+#### Pure Spockframework setting
+```xml
+<dependency>
+    <groupId>io.github.achelois-armoury</groupId>
+    <artifactId>helical-core</artifactId>
+    <version>0.1.8</version>
+    <scope>test</scope>
+</dependency>
+```
+1. Create a new directory META-INF/services in your project resources folder.
+2. Create a new file org.spockframework.runtime.extension.IGlobalExtension in the newly created directory
+
+3. Add following content into the newly created file
+```text
+com.achelois.helical.plugins.spock.SpockGlobalListenerExt
+```
+
+#### TestNG setting
+```xml
+<dependencies>
+    [...]
+    <dependency>
+        <groupId>io.github.achelois-armoury</groupId>
+        <artifactId>helical-testng</artifactId>
+        <version>0.1.6</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <includes>
+            <include>**/*.java</include>
+        </includes>
+        <properties>
+            <property>
+                <name>listener</name>
+                <value>com.achelois.helical.TestngListener</value>
+            </property>
+        </properties>
+    </configuration>
+</plugin>
 ```
 
 ## Running the tests
