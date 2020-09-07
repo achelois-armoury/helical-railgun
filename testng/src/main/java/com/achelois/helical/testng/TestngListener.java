@@ -60,6 +60,6 @@ public class TestngListener implements ITestListener {
             message = iTestResult.getThrowable().getMessage();
         }
         Bullet bullet = new Bullet(caseId, status, message);
-        railgun.load(bullet);
+        assert railgun.load(bullet);
     }
 }

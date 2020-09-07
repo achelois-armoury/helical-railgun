@@ -12,9 +12,9 @@ import java.util.List;
 public class Railgun {
 
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Railgun.class);
-    private List<Result> magazine;
-    private TestRail testRail;
-    private Setting config;
+    private final List<Result> magazine;
+    private final TestRail testRail;
+    private final Setting config;
 
     public Railgun() {
         config = Settings.getInstance();
@@ -56,14 +56,13 @@ public class Railgun {
             List<Test> tests = testRail.tests().list(config.getRunid()).execute();
 
             log.info("total test retrieved: " + tests.size());
-            tests.stream().parallel().forEach(t -> magazine.add(
-                    new Result()
-                            .setCaseId(t.getCaseId())
-                            .setStatusId(config.getResult_template().getStatus())
-                            .setComment(config.getResult_template().getComment())
-                            .setVersion(config.getResult_template().getVersion())
-            ));
-
+            for (Test t : tests) {
+                magazine.add(new Result()
+                                 .setCaseId(t.getCaseId())
+                                 .setStatusId(config.getResult_template().getStatus())
+                                 .setComment(config.getResult_template().getComment())
+                                 .setVersion(config.getResult_template().getVersion()));
+            }
         } catch (Exception e) {
             log.warn("initialization failed: no test retrieved!", e.getCause());
         }

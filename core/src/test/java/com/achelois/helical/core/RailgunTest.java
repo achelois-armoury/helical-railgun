@@ -10,6 +10,6 @@ public class RailgunTest {
         Railgun railgun = new Railgun();
 
         Assert.assertNotNull(railgun);
-        Assert.assertEquals(2, railgun.getMagazine().size());
+        Assert.assertEquals(5, railgun.getMagazine().size());
     }
 }

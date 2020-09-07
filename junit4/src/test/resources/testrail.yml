@@ -1,8 +1,8 @@
 enable: true
-endpoint: "https://maxleow.testrail.io"
-username: "lionstrength@gmail.com"
-password: "6rPAVsdgh9Xrpcfm/rZN-/vgIl0LniC6UPhIJnP99"
-runid: 3
+endpoint: "https://maxleow2.testrail.io"
+username: "maxengiu@outlook.com"
+password: "WS5GiZzo7RPYX.lnaRr3-CE3Uuz9G4Aq1Cr/fLuzz"
+runid: 1
 
 result_template:
   status: 4

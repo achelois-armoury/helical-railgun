@@ -22,7 +22,7 @@ public class ListenForStatusListener extends AbstractRunListener {
     public void error(ErrorInfo error) {
         CaseId caseId = error.getMethod().getAnnotation(CaseId.class);
         Bullet bullet = new Bullet(caseId, Status.Failed, error.getException().getMessage());
-        railgun.load(bullet);
+        assert railgun.load(bullet);
     }
 
     public void beforeSpec(SpecInfo spec) {
@@ -32,7 +32,7 @@ public class ListenForStatusListener extends AbstractRunListener {
     public void beforeFeature(FeatureInfo feature) {
         CaseId caseId = feature.getFeatureMethod().getAnnotation(CaseId.class);
         Bullet bullet = new Bullet(caseId, Status.Passed, "");
-        railgun.load(bullet);
+        assert railgun.load(bullet);
     }
 
     public void beforeIteration(IterationInfo iteration) {
