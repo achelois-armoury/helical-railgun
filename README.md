@@ -150,3 +150,6 @@ Please make sure to update tests as appropriate.
 
 ### Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/achelois-armoury/helical-railgun/tags). 
+
+### Sponsored by
+[Jetbrains](https://www.jetbrains.com/?from=helical-railgun)
