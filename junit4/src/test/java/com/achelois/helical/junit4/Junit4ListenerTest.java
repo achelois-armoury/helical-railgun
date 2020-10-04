@@ -21,7 +21,7 @@ public class Junit4ListenerTest {
 
         junit4Listener.getRailgun().getMagazine().forEach(System.out::println);
 
-        Assert.assertEquals(5, junit4Listener.getRailgun().getMagazine().size());
+        Assert.assertEquals(0, junit4Listener.getRailgun().getMagazine().size());
     }
 
     public static class WoodenMan {
